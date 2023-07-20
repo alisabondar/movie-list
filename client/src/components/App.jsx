@@ -4,25 +4,18 @@ import MovieList from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
 
 var movies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
+  {title: 'Mean Girls', watched: false},
+  {title: 'Hackers', watched: false},
+  {title: 'The Grey', watched: false},
+  {title: 'Sunshine', watched: false},
+  {title: 'Ex Machina', watched: false},
 ];
 
 var App = (props) => {
 
   const [movieList, setMovieList] = useState(movies);
-  // const [watchedMovies, setWatchedMovies] = useState()
 
-  movies.forEach(movie => {
-    movie["watched"] = false;
-  })
-  console.log(movies)
-
-  var watchedList = movies.filter( movie => movie.watched === true);
-  var toWatchList = movies.filter( movie => movie.watched === false);
+  console.log(movies);
 
   let timeout = null;
   var handleSearch = (e) => {
@@ -54,20 +47,42 @@ var addMovie = (userInput) => {
   setMovieList(list);
 }
 
-var handleToggle = (currentMovie) => {
-  // flip T to F and F to T
-  currentMovie.watched = !currentMovie.watched;
-  // create temp variable and reassign movieList or include state in movie.jsx
-}
+// create function that updates movies and state and then pass it down
+var updateMovieList = (currentMovie) => {
+  // update list with watched property
+  // iterate through movies === currentMovie
+  // currentMovie -> watched property
+  // update list
+  for (var i = 0; i < movieList.length; i++) {
+    if (movieList[i].title === currentMovie.title) {
+      movieList[i].watched = currentMovie.watched;
+    }
+  }
+  setMovieList(movieList);
+ }
 
 var handleWatchedButton = () => {
-  // var watchedList = movieList.filter( movie => movie.watched === true);
+  setMovieList(movies);
+  var watchedList = [];
+  for (var i = 0; i < movies.length; i++) {
+    if (movies[i].watched === true) {
+      watchedList.push(movies[i]);
+    }
+  }
+  console.log(watchedList)
   setMovieList(watchedList);
 }
 
 var handleNotWatchedButton = () => {
-  // var notWatched = movieList.filter( movie => movie.watched === false);
-  setMovieList(toWatchList);
+  setMovieList(movies);
+  var notWatched = [];
+  for (var i = 0; i < movies.length; i++) {
+    if (movies[i].watched === false) {
+      notWatched.push(movies[i]);
+    }
+  }
+  console.log(notWatched)
+  setMovieList(notWatched);
 }
 
   return (
@@ -76,15 +91,14 @@ var handleNotWatchedButton = () => {
         <AddMovie addMovie={addMovie}/>
       </div>
       <div>
-        <button onClick={handleWatchedButton}>Watched</button>
-        <button onClick={handleNotWatchedButton}>Not Watched</button>
         <Search handleSearch={(e) => handleSearch(e)} />
       </div>
       <div className='movielist'>
-        <MovieList movies={movieList} handleToggle={handleToggle}/>
+        <button onClick={handleWatchedButton}>Watched</button>
+        <button onClick={handleNotWatchedButton}>Not Watched</button>
+        <MovieList movies={movieList} updateMovieList ={updateMovieList} />
       </div>
-
-    </div>
+    </div >
   )
 };
 

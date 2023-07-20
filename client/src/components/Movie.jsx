@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
 // render movie/movieList here
-var Movie = ({movie, handleToggle}) => {
-  // add state for movie -> watched or not
-  const [watched, setWatched] = useState(movie.watched);
+var Movie = ({movie, updateMovieList}) => {
+
+  const [status, setStatus] = useState(movie.watched ? true : false );
 
   var handleClick = () => {
-    setWatched(!watched);
+    var changeWatched = {...movie, watched: !movie.watched};
+    //call movieWatched here
+    updateMovieList(changeWatched);
+    setStatus(movie.watched ? true: false);
+  }
+
+  // conditionally render the button
+  const button = () => {
+    if (movie.watched) {
+      return <button onClick={handleClick}>WatchedButton</button>
+    } else {
+      console.log(movie.watched);
+      return <button onClick={handleClick}>To Be WatchedButton</button>
+    }
   }
 
   return(
     <div id='movie'>
       <li title={movie}>{movie.title}</li>
-      <button onClick={handleClick}>{watched ? 'Watched' : 'To Be Watched'}</button>
+      {button()}
     </div>
   )
 }
