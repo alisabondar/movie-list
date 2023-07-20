@@ -4,11 +4,11 @@ import MovieList from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
 
 var movies = [
-  {title: 'Mean Girls', watched: false},
-  {title: 'Hackers', watched: false},
-  {title: 'The Grey', watched: false},
-  {title: 'Sunshine', watched: false},
-  {title: 'Ex Machina', watched: false},
+  {title: 'Mean Girls', Year: 1995, Runtime: '345min', Metascore: 46, watched: false},
+  {title: 'Hackers', Year: 1992, Runtime: '14min', Metascore: 765, watched: false},
+  {title: 'The Grey', Year: 1924, Runtime: '135min', Metascore: 543, watched: false},
+  {title: 'Sunshine', Year: 1945, Runtime: '1247min', Metascore: 674, watched: false},
+  {title: 'Ex Machina', Year: 1965, Runtime: '112min', Metascore: 642, watched: false},
 ];
 
 var App = (props) => {

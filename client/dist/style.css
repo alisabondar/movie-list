@@ -3,7 +3,17 @@ body {
   margin: auto
 }
 
-.movies {
+#watchButton {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+/* .movies {
   display: flex;
   flex-direction: column;
 }
@@ -15,4 +25,4 @@ body {
   border: 10px solid black;
   padding: 30px;
   margin: 10px
-}
+} */
