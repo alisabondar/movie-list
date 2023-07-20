@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Search from './Search.jsx';
 import MovieList from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
+// import Parse from '../lib/serverRequest.js';
+
 
 var movies = [
   {title: 'Mean Girls', Year: 1995, Runtime: '345min', Metascore: 46, watched: false},
@@ -14,6 +16,15 @@ var movies = [
 var App = (props) => {
 
   const [movieList, setMovieList] = useState(movies);
+
+  // var fetch = function(callback = ()=>{}) {
+  //   Parse.readAll((data) => {
+  //     console.log(data);
+  //     callback();
+  //   });
+  // },
+
+  // fetch();
 
   console.log(movies);
 
