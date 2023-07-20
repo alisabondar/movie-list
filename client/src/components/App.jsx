@@ -3,7 +3,6 @@ import Search from './Search.jsx';
 import MovieList from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
 
-// console.log("here")
 var movies = [
   {title: 'Mean Girls'},
   {title: 'Hackers'},
@@ -15,13 +14,15 @@ var movies = [
 var App = (props) => {
 
   const [movieList, setMovieList] = useState(movies);
+  // const [watchedMovies, setWatchedMovies] = useState()
+
   movies.forEach(movie => {
     movie["watched"] = false;
   })
+  console.log(movies)
 
   var watchedList = movies.filter( movie => movie.watched === true);
   var toWatchList = movies.filter( movie => movie.watched === false);
-  console.log(toWatchList);
 
   let timeout = null;
   var handleSearch = (e) => {
@@ -45,7 +46,6 @@ var App = (props) => {
     }
     clearTimeout(timeout)
     timeout = setTimeout(() => {findMatch()}, 1000)
-    console.log(movieList);
   }
 
 var addMovie = (userInput) => {
@@ -54,20 +54,20 @@ var addMovie = (userInput) => {
   setMovieList(list);
 }
 
-var handleToggle = (e) => {
-  if (movie.watched === false) {
-    movie.watched = true;
-  } else {
-    movie.watched = false;
-  }
+var handleToggle = (currentMovie) => {
+  // flip T to F and F to T
+  currentMovie.watched = !currentMovie.watched;
+  // create temp variable and reassign movieList or include state in movie.jsx
 }
 
 var handleWatchedButton = () => {
-
+  // var watchedList = movieList.filter( movie => movie.watched === true);
+  setMovieList(watchedList);
 }
 
-var handlenNotWatchedButton = () => {
-
+var handleNotWatchedButton = () => {
+  // var notWatched = movieList.filter( movie => movie.watched === false);
+  setMovieList(toWatchList);
 }
 
   return (
@@ -76,12 +76,12 @@ var handlenNotWatchedButton = () => {
         <AddMovie addMovie={addMovie}/>
       </div>
       <div>
-        <button>Watched</button>
-        <button>Not Watched</button>
+        <button onClick={handleWatchedButton}>Watched</button>
+        <button onClick={handleNotWatchedButton}>Not Watched</button>
         <Search handleSearch={(e) => handleSearch(e)} />
       </div>
       <div className='movielist'>
-        <MovieList movies={movieList} />
+        <MovieList movies={movieList} handleToggle={handleToggle}/>
       </div>
 
     </div>
